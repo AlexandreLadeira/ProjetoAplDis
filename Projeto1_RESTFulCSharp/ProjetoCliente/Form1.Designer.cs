@@ -66,25 +66,25 @@
             this.txtInserirAluno3 = new System.Windows.Forms.TextBox();
             this.txtInserirAluno2 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.txt = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtAlterarNome = new System.Windows.Forms.TextBox();
+            this.txtAlterarCodigoProjeto = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtAlterarProfessor1 = new System.Windows.Forms.TextBox();
+            this.txtAlterarProfessor2 = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.txtAlterarAluno2 = new System.Windows.Forms.TextBox();
+            this.txtAlterarAluno3 = new System.Windows.Forms.TextBox();
+            this.txtAlterarAluno1 = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.btnAlterarSelecionarProjeto = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.txtAlterarAno = new System.Windows.Forms.TextBox();
+            this.txtAlterarDescricao = new System.Windows.Forms.TextBox();
             this.btnAlterarProjeto = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvConsultaProjetos)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -315,23 +315,23 @@
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.btnAlterarProjeto);
-            this.tabPage3.Controls.Add(this.textBox8);
-            this.tabPage3.Controls.Add(this.textBox1);
+            this.tabPage3.Controls.Add(this.txtAlterarDescricao);
+            this.tabPage3.Controls.Add(this.txtAlterarAno);
             this.tabPage3.Controls.Add(this.label22);
             this.tabPage3.Controls.Add(this.label21);
             this.tabPage3.Controls.Add(this.btnAlterarSelecionarProjeto);
-            this.tabPage3.Controls.Add(this.textBox5);
-            this.tabPage3.Controls.Add(this.textBox6);
-            this.tabPage3.Controls.Add(this.textBox7);
+            this.tabPage3.Controls.Add(this.txtAlterarAluno2);
+            this.tabPage3.Controls.Add(this.txtAlterarAluno3);
+            this.tabPage3.Controls.Add(this.txtAlterarAluno1);
             this.tabPage3.Controls.Add(this.label18);
             this.tabPage3.Controls.Add(this.label19);
             this.tabPage3.Controls.Add(this.label20);
-            this.tabPage3.Controls.Add(this.textBox3);
-            this.tabPage3.Controls.Add(this.textBox4);
+            this.tabPage3.Controls.Add(this.txtAlterarProfessor1);
+            this.tabPage3.Controls.Add(this.txtAlterarProfessor2);
             this.tabPage3.Controls.Add(this.label16);
             this.tabPage3.Controls.Add(this.label17);
-            this.tabPage3.Controls.Add(this.txt);
-            this.tabPage3.Controls.Add(this.textBox2);
+            this.tabPage3.Controls.Add(this.txtAlterarNome);
+            this.tabPage3.Controls.Add(this.txtAlterarCodigoProjeto);
             this.tabPage3.Controls.Add(this.label14);
             this.tabPage3.Controls.Add(this.label15);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
@@ -479,19 +479,19 @@
             this.label13.TabIndex = 21;
             this.label13.Text = "* Campos opcionais podem ser deixados em branco!";
             // 
-            // txt
+            // txtAlterarNome
             // 
-            this.txt.Location = new System.Drawing.Point(90, 91);
-            this.txt.Name = "txt";
-            this.txt.Size = new System.Drawing.Size(119, 23);
-            this.txt.TabIndex = 14;
+            this.txtAlterarNome.Location = new System.Drawing.Point(90, 91);
+            this.txtAlterarNome.Name = "txtAlterarNome";
+            this.txtAlterarNome.Size = new System.Drawing.Size(119, 23);
+            this.txtAlterarNome.TabIndex = 14;
             // 
-            // textBox2
+            // txtAlterarCodigoProjeto
             // 
-            this.textBox2.Location = new System.Drawing.Point(90, 10);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(119, 23);
-            this.textBox2.TabIndex = 13;
+            this.txtAlterarCodigoProjeto.Location = new System.Drawing.Point(90, 10);
+            this.txtAlterarCodigoProjeto.Name = "txtAlterarCodigoProjeto";
+            this.txtAlterarCodigoProjeto.Size = new System.Drawing.Size(119, 23);
+            this.txtAlterarCodigoProjeto.TabIndex = 13;
             // 
             // label14
             // 
@@ -511,19 +511,19 @@
             this.label15.TabIndex = 11;
             this.label15.Text = "Código: ";
             // 
-            // textBox3
+            // txtAlterarProfessor1
             // 
-            this.textBox3.Location = new System.Drawing.Point(321, 206);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(119, 23);
-            this.textBox3.TabIndex = 21;
+            this.txtAlterarProfessor1.Location = new System.Drawing.Point(321, 206);
+            this.txtAlterarProfessor1.Name = "txtAlterarProfessor1";
+            this.txtAlterarProfessor1.Size = new System.Drawing.Size(119, 23);
+            this.txtAlterarProfessor1.TabIndex = 21;
             // 
-            // textBox4
+            // txtAlterarProfessor2
             // 
-            this.textBox4.Location = new System.Drawing.Point(321, 235);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(119, 23);
-            this.textBox4.TabIndex = 20;
+            this.txtAlterarProfessor2.Location = new System.Drawing.Point(321, 235);
+            this.txtAlterarProfessor2.Name = "txtAlterarProfessor2";
+            this.txtAlterarProfessor2.Size = new System.Drawing.Size(119, 23);
+            this.txtAlterarProfessor2.TabIndex = 20;
             // 
             // label16
             // 
@@ -543,26 +543,26 @@
             this.label17.TabIndex = 18;
             this.label17.Text = "Professor 2:";
             // 
-            // textBox5
+            // txtAlterarAluno2
             // 
-            this.textBox5.Location = new System.Drawing.Point(90, 206);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(119, 23);
-            this.textBox5.TabIndex = 27;
+            this.txtAlterarAluno2.Location = new System.Drawing.Point(90, 206);
+            this.txtAlterarAluno2.Name = "txtAlterarAluno2";
+            this.txtAlterarAluno2.Size = new System.Drawing.Size(119, 23);
+            this.txtAlterarAluno2.TabIndex = 27;
             // 
-            // textBox6
+            // txtAlterarAluno3
             // 
-            this.textBox6.Location = new System.Drawing.Point(90, 235);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(119, 23);
-            this.textBox6.TabIndex = 26;
+            this.txtAlterarAluno3.Location = new System.Drawing.Point(90, 235);
+            this.txtAlterarAluno3.Name = "txtAlterarAluno3";
+            this.txtAlterarAluno3.Size = new System.Drawing.Size(119, 23);
+            this.txtAlterarAluno3.TabIndex = 26;
             // 
-            // textBox7
+            // txtAlterarAluno1
             // 
-            this.textBox7.Location = new System.Drawing.Point(90, 177);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(119, 23);
-            this.textBox7.TabIndex = 25;
+            this.txtAlterarAluno1.Location = new System.Drawing.Point(90, 177);
+            this.txtAlterarAluno1.Name = "txtAlterarAluno1";
+            this.txtAlterarAluno1.Size = new System.Drawing.Size(119, 23);
+            this.txtAlterarAluno1.TabIndex = 25;
             // 
             // label18
             // 
@@ -618,20 +618,20 @@
             this.label22.TabIndex = 30;
             this.label22.Text = "Descrição: ";
             // 
-            // textBox1
+            // txtAlterarAno
             // 
-            this.textBox1.Location = new System.Drawing.Point(90, 120);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(119, 23);
-            this.textBox1.TabIndex = 31;
+            this.txtAlterarAno.Location = new System.Drawing.Point(90, 120);
+            this.txtAlterarAno.Name = "txtAlterarAno";
+            this.txtAlterarAno.Size = new System.Drawing.Size(119, 23);
+            this.txtAlterarAno.TabIndex = 31;
             // 
-            // textBox8
+            // txtAlterarDescricao
             // 
-            this.textBox8.Location = new System.Drawing.Point(240, 120);
-            this.textBox8.Multiline = true;
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(200, 80);
-            this.textBox8.TabIndex = 32;
+            this.txtAlterarDescricao.Location = new System.Drawing.Point(240, 120);
+            this.txtAlterarDescricao.Multiline = true;
+            this.txtAlterarDescricao.Name = "txtAlterarDescricao";
+            this.txtAlterarDescricao.Size = new System.Drawing.Size(200, 80);
+            this.txtAlterarDescricao.TabIndex = 32;
             // 
             // btnAlterarProjeto
             // 
@@ -709,23 +709,23 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnAlterarProjeto;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtAlterarDescricao;
+        private System.Windows.Forms.TextBox txtAlterarAno;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button btnAlterarSelecionarProjeto;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox txtAlterarAluno2;
+        private System.Windows.Forms.TextBox txtAlterarAluno3;
+        private System.Windows.Forms.TextBox txtAlterarAluno1;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtAlterarProfessor1;
+        private System.Windows.Forms.TextBox txtAlterarProfessor2;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox txt;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtAlterarNome;
+        private System.Windows.Forms.TextBox txtAlterarCodigoProjeto;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
     }
