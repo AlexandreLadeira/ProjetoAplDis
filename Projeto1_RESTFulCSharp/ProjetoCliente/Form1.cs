@@ -44,6 +44,8 @@ namespace ProjetoCliente
 
                         gvConsultaProjetos.DataSource = JsonConvert.DeserializeObject<Projeto[]>(projetoJSONString).ToList();
                     }
+                    else
+                        throw new Exception(response.ReasonPhrase);
                 }
 
             }
@@ -93,8 +95,10 @@ namespace ProjetoCliente
                             gvConsultaProjetos.Columns[i].HeaderText = "Prof. " + (j + 1);
                             gvConsultaProjetos.Rows[0].Cells[i].Value = "Código: " + alEProf.Professores[j].Codigo.ToString();
                         }
-                            
+
                     }
+                    else
+                        throw new Exception(response.ReasonPhrase);
                 }
 
             }
@@ -159,6 +163,8 @@ namespace ProjetoCliente
                         }
 
                     }
+                    else
+                        throw new Exception(response.ReasonPhrase);
                 }
             }
             catch (Exception e)
@@ -186,20 +192,25 @@ namespace ProjetoCliente
                     var content = new StringContent(serializedProjeto, Encoding.UTF8, "application/json");
                     var response = await cliente.PostAsync(URI, content);
 
-                    var resultString = await response.Content.ReadAsStringAsync();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var resultString = await response.Content.ReadAsStringAsync();
 
-                    var result = JsonConvert.DeserializeObject<int>(resultString);
-                    txtCodigoProjetoInserido.Text = result.ToString();
+                        var result = JsonConvert.DeserializeObject<int>(resultString);
+                        txtCodigoProjetoInserido.Text = result.ToString();
 
-                    MessageBox.Show("Dados do projeto inseridos com sucesso! Agora, inclua os alunos e professores abaixo.");
+                        MessageBox.Show("Dados do projeto inseridos com sucesso! Agora, inclua os alunos e professores abaixo.");
 
-                    txtInserirAluno1.ReadOnly     = false;
-                    txtInserirAluno2.ReadOnly     = false;
-                    txtInserirAluno3.ReadOnly     = false;
-                    txtInserirProfessor1.ReadOnly = false;
-                    txtInserirProfessor2.ReadOnly = false;
-                    btnInserirProfessores.Enabled = true;
-                    btnInserirAlunos.Enabled      = true;
+                        txtInserirAluno1.ReadOnly = false;
+                        txtInserirAluno2.ReadOnly = false;
+                        txtInserirAluno3.ReadOnly = false;
+                        txtInserirProfessor1.ReadOnly = false;
+                        txtInserirProfessor2.ReadOnly = false;
+                        btnInserirProfessores.Enabled = true;
+                        btnInserirAlunos.Enabled = true;
+                    }
+                    else
+                        throw new Exception("Erro na inserção! Verifique se os dados foram preenchidos corretamente!");
                 }
             }
             catch (Exception e)
@@ -260,6 +271,22 @@ namespace ProjetoCliente
                     MessageBox.Show("Preencha o campo URI!");
                 else
                 {
+                    URI = txtURI.Text + "?codigoProjetoParaSelecionarDados=" + txtAlterarCodigoProjeto.Text;
+                    response = await cliente.GetAsync(URI);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string projetoJSONString = await response.Content.ReadAsStringAsync();
+
+                        Projeto proj = JsonConvert.DeserializeObject<Projeto>(projetoJSONString);
+
+                        txtAlterarNome.Text      = proj.Nome;
+                        txtAlterarAno.Text       = proj.Ano;
+                        txtAlterarDescricao.Text = proj.Descricao;
+                    }
+                    else
+                        throw new Exception("Houve um erro na ação! Verifique se existe um curso com tal código!");
+
                     BindingSource bsDados = new BindingSource();
                     URI = txtURI.Text + "?codigo=" + txtAlterarCodigoProjeto.Text;
                     response = await cliente.GetAsync(URI);
@@ -291,6 +318,8 @@ namespace ProjetoCliente
                             gvAlterarAlunosEProfessores.Rows[0].Cells[i].Value = "Código: " + alEProf.Professores[j].Codigo.ToString();
                         }
                     }
+                    else
+                        throw new Exception("Houve um erro! Verifique se existe um curso com esse código!");
                 }
             }
             catch (Exception e)
@@ -331,11 +360,17 @@ namespace ProjetoCliente
                     var serializedCodigos = JsonConvert.SerializeObject(codigosProfessores);
                     var content = new StringContent(serializedCodigos, Encoding.UTF8, "application/json");
                     var result3 = await cliente.PutAsync(URIProfessores, content);
-                    MessageBox.Show("Professores foram incluídos com sucesso!");
 
-                    txtInserirProfessor1.ReadOnly = true;
-                    txtInserirProfessor2.ReadOnly = true;
-                    btnInserirProfessores.Enabled = false;
+                    if (result3.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Professores foram incluídos com sucesso!");
+
+                        txtInserirProfessor1.ReadOnly = true;
+                        txtInserirProfessor2.ReadOnly = true;
+                        btnInserirProfessores.Enabled = false;
+                    }
+                    else
+                        throw new Exception("Erro na inclusão do professor ao projeto! \n " + result3.ReasonPhrase);
                 }
                 catch (Exception e)
                 {
@@ -386,12 +421,17 @@ namespace ProjetoCliente
                     var serializedRas = JsonConvert.SerializeObject(ras);
                     var content = new StringContent(serializedRas, Encoding.UTF8, "application/json");
                     var result = await cliente.PutAsync(URIAlunos, content);
-                    MessageBox.Show("Aluno(s) inserido(s) ao projeto!");
+                    if (result.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Aluno(s) inserido(s) ao projeto!");
 
-                    txtInserirAluno1.ReadOnly = true;
-                    txtInserirAluno2.ReadOnly = true;
-                    txtInserirAluno3.ReadOnly = true;
-                    btnInserirAlunos.Enabled = false;
+                        txtInserirAluno1.ReadOnly = true;
+                        txtInserirAluno2.ReadOnly = true;
+                        txtInserirAluno3.ReadOnly = true;
+                        btnInserirAlunos.Enabled = false;
+                    }
+                    else
+                        throw new Exception("Erro na inclusão do aluno ao projeto! \n " + result.ReasonPhrase);
                 }
                 catch (Exception e)
                 {
@@ -529,9 +569,43 @@ namespace ProjetoCliente
             }
         }
 
-        private void AlterarProjeto()
+        private async void AlterarProjeto()
         {
+            try
+            {
+                URI = txtURI.Text;
 
+                if (String.IsNullOrEmpty(URI))
+                    MessageBox.Show("Preencha o campo URI!");
+                else
+                {
+                    if (String.IsNullOrEmpty(txtAlterarCodigoProjeto.Text) ||
+                        String.IsNullOrEmpty(txtAlterarNome.Text)          ||
+                        String.IsNullOrEmpty(txtAlterarDescricao.Text)     ||
+                        String.IsNullOrEmpty(txtAlterarNome.Text))
+                        throw new Exception("Preencha os campos corretamente!");
+
+                    URI = txtURI.Text + "?codigo=" + txtAlterarCodigoProjeto.Text + "&nome=" + txtAlterarNome.Text + 
+                        "&descricao=" + txtAlterarDescricao.Text + "&ano=" + txtAlterarAno.Text;
+                    var response = await cliente.PutAsync(URI, null);
+
+                    try
+                    {
+                        if (response.IsSuccessStatusCode)
+                            MessageBox.Show("Dados do projeto alterados!");
+                        else
+                            throw new Exception("Houve um erro ao realizar a tarefa!");
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception(e.Message);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void btnConsultarPorCodigo_Click(object sender, EventArgs e)

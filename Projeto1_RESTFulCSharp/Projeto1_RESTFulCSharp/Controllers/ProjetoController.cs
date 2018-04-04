@@ -27,7 +27,27 @@ namespace Projeto1_RESTFulCSharp.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                var msg = new HttpResponseMessage(HttpStatusCode.NotAcceptable)
+                {
+                    ReasonPhrase = e.Message
+                };
+                throw new HttpResponseException(msg);
+            }
+        }
+
+        public Projeto GetDadosProjeto(int codigoProjetoParaSelecionarDados)
+        {
+            try
+            {
+                return projetos.SelecionaDadosProjeto(codigoProjetoParaSelecionarDados);
+            }
+            catch (Exception e)
+            {
+                var msg = new HttpResponseMessage(HttpStatusCode.NotAcceptable)
+                {
+                    ReasonPhrase = e.Message
+                };
+                throw new HttpResponseException(msg);
             }
         }
 
@@ -39,7 +59,11 @@ namespace Projeto1_RESTFulCSharp.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                var msg = new HttpResponseMessage(HttpStatusCode.NotAcceptable)
+                {
+                    ReasonPhrase = e.Message
+                };
+                throw new HttpResponseException(msg);
             }
         }
 
@@ -51,7 +75,11 @@ namespace Projeto1_RESTFulCSharp.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                var msg = new HttpResponseMessage(HttpStatusCode.NotAcceptable)
+                {
+                    ReasonPhrase = e.Message
+                };
+                throw new HttpResponseException(msg);
             }
         }
 
@@ -63,13 +91,14 @@ namespace Projeto1_RESTFulCSharp.Controllers
             }
             catch (Exception e)
             {
-                var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized)
+                var msg = new HttpResponseMessage(HttpStatusCode.NotAcceptable)
                 {
                     ReasonPhrase = e.Message
                 };
                 throw new HttpResponseException(msg);
             }
         }
+        
 
         public void PutProjetoAluno(string[] ras, int codigoProjetoAluno)
         {
@@ -79,7 +108,11 @@ namespace Projeto1_RESTFulCSharp.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                var msg = new HttpResponseMessage(HttpStatusCode.NotAcceptable)
+                {
+                    ReasonPhrase = e.Message
+                };
+                throw new HttpResponseException(msg);
             }
         }
 
@@ -91,7 +124,11 @@ namespace Projeto1_RESTFulCSharp.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                var msg = new HttpResponseMessage(HttpStatusCode.NotAcceptable)
+                {
+                    ReasonPhrase = e.Message
+                };
+                throw new HttpResponseException(msg);
             }
         } 
 
@@ -104,7 +141,11 @@ namespace Projeto1_RESTFulCSharp.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                var msg = new HttpResponseMessage(HttpStatusCode.NotAcceptable)
+                {
+                    ReasonPhrase = e.Message
+                };
+                throw new HttpResponseException(msg);
             }
         }
 
@@ -116,7 +157,11 @@ namespace Projeto1_RESTFulCSharp.Controllers
             }
             catch(Exception e)
             {
-                throw new Exception(e.Message);
+                var msg = new HttpResponseMessage(HttpStatusCode.NotAcceptable)
+                {
+                    ReasonPhrase = e.Message
+                };
+                throw new HttpResponseException(msg);
             }
         }
 
@@ -128,7 +173,27 @@ namespace Projeto1_RESTFulCSharp.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                var msg = new HttpResponseMessage(HttpStatusCode.NotAcceptable)
+                {
+                    ReasonPhrase = e.Message
+                };
+                throw new HttpResponseException(msg);
+            }
+        }
+        
+        public void PutProjeto(int codigo, string nome, string descricao, string ano)
+        {
+            try
+            {
+                projetos.AlterarDadosProjeto(codigo, nome, ano, descricao);
+            }
+            catch (Exception e)
+            {
+                var msg = new HttpResponseMessage(HttpStatusCode.NotAcceptable)
+                {
+                    ReasonPhrase = e.Message
+                };
+                throw new HttpResponseException(msg);
             }
         }
 
@@ -140,7 +205,11 @@ namespace Projeto1_RESTFulCSharp.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                var msg = new HttpResponseMessage(HttpStatusCode.NotAcceptable)
+                {
+                    ReasonPhrase = e.Message
+                };
+                throw new HttpResponseException(msg);
             }
         }
     }

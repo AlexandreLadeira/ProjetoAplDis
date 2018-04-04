@@ -57,9 +57,9 @@ namespace Projeto1_RESTFulCSharp.Models
         {
             try
             {
-                AlunoEProfessor alunosEProfessores = new AlunoEProfessor();
+                AlunoEProfessor alunosEProfessores = new AlunoEProfessor(); //Uma classe que armazena alunos e professores em um mesmo objeto
 
-                SqlCommand comando = new SqlCommand("ConsultaAlunosDoProjeto_sp");
+                SqlCommand comando = new SqlCommand("ConsultaAlunosDoProjeto_sp"); //Devolve todos os alunos relacionados ao projeto
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Connection = conexao;
 
@@ -82,7 +82,7 @@ namespace Projeto1_RESTFulCSharp.Models
 
                 leitor.Close();
 
-                SqlCommand comando2 = new SqlCommand("ConsultaProfessoresDoProjeto_sp");
+                SqlCommand comando2 = new SqlCommand("ConsultaProfessoresDoProjeto_sp"); //Devolve todos os professores relacionados ao projeto
                 comando2.CommandType = System.Data.CommandType.StoredProcedure;
                 comando2.Connection = conexao;
 
@@ -103,6 +103,35 @@ namespace Projeto1_RESTFulCSharp.Models
                 }
 
                 return alunosEProfessores;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public Projeto SelecionaDadosProjeto(int codigoParaSelecionarDados)
+        {
+            try
+            {
+                SqlCommand comando = new SqlCommand("SelecionaProjeto_sp");
+                comando.CommandType = System.Data.CommandType.StoredProcedure;
+                comando.Connection = conexao;
+
+                SqlParameter prmCodigo = new SqlParameter("@codigo", codigoParaSelecionarDados);
+                prmCodigo.Direction = System.Data.ParameterDirection.Input;
+                comando.Parameters.Add(prmCodigo);
+                
+                SqlDataReader leitor = comando.ExecuteReader();
+
+                Projeto projeto;
+
+                leitor.Read();
+                projeto = new Projeto((int)leitor[0], (string)leitor[1], (string)leitor[2], (string)leitor[3]);
+                
+                leitor.Close();
+                
+                return projeto;
             }
             catch (Exception e)
             {
@@ -196,6 +225,9 @@ namespace Projeto1_RESTFulCSharp.Models
                 }
             }
 
+            // FIM DA VERIFICACAO ------------------------------------------------------
+
+            // Conecta alunos do vetor ao projeto
             int alunoAtual = 0;
 
             SqlCommand comandoRelacionarAluno = new SqlCommand("ConectaProjetoAluno_sp");
@@ -238,6 +270,8 @@ namespace Projeto1_RESTFulCSharp.Models
 
                 leitorQtosAlunos.Close();
 
+                // FIM DA VERIFICACAO ------------------------------------------------------
+
                 //Exclui o professor
                 SqlCommand comandoRelacionarProfessor = new SqlCommand("excluiProfessor_sp");
                 comandoRelacionarProfessor.CommandType = System.Data.CommandType.StoredProcedure;
@@ -259,6 +293,7 @@ namespace Projeto1_RESTFulCSharp.Models
 
         }
 
+        // Conectar um único professor
         public void conectaProfessorAoProjeto(int codigoProfessor, int codigoProjeto)
         {
             try
@@ -281,7 +316,9 @@ namespace Projeto1_RESTFulCSharp.Models
 
                 leitorQtosProfessores.Close();
 
+                // FIM DA VERIFICACAO ------------------------------------------------------
 
+                // Conecta professor ao projeto
                 SqlCommand comandoRelacionarProfessor = new SqlCommand("ConectaProjetoProfessor_sp");
                 comandoRelacionarProfessor.CommandType = System.Data.CommandType.StoredProcedure;
                 comandoRelacionarProfessor.Connection = conexao;
@@ -300,6 +337,7 @@ namespace Projeto1_RESTFulCSharp.Models
             }
         }
         
+        // Deletar um único aluno
         public void deletaAlunoDoProjeto(string raAluno, int codigoProjeto)
         {
             try
@@ -324,6 +362,9 @@ namespace Projeto1_RESTFulCSharp.Models
 
                 leitorQtosAlunos.Close();
 
+                // FIM DA VERIFICACAO ------------------------------------------------------
+                 
+                // Deleta o aluno do projeto
                 SqlCommand comandoRelacionarAluno = new SqlCommand("excluiAluno_sp");
                 comandoRelacionarAluno.CommandType = System.Data.CommandType.StoredProcedure;
                 comandoRelacionarAluno.Connection = conexao;
@@ -342,6 +383,7 @@ namespace Projeto1_RESTFulCSharp.Models
             }
         }
 
+        //Conecta um único aluno ao projeto
         public void conectaAlunoAoProjeto(string raAluno, int codigoProjeto)
         {
             try
@@ -365,6 +407,7 @@ namespace Projeto1_RESTFulCSharp.Models
                     throw new Exception("O projeto já tem a quantidade máxima de alunos!");
 
                 leitorQtosAlunos.Close();
+                // FIM DA VERIFICACAO ------------------------------------------------------
 
                 // Verifica se algum dos alunos já está em um projeto
                 SqlCommand comandoVerificacao = new SqlCommand("ChecaSeJaEstaEmProjeto_sp");
@@ -384,6 +427,10 @@ namespace Projeto1_RESTFulCSharp.Models
                 comandoVerificacao.Parameters.Clear();
                 leitorVerificacao.Close();
 
+                // FIM DA VERIFICACAO ------------------------------------------------------
+
+
+                // Conectar aluno ao projeto
                 SqlCommand comandoRelacionarAluno = new SqlCommand("ConectaProjetoAluno_sp");
                 comandoRelacionarAluno.CommandType = System.Data.CommandType.StoredProcedure;
                 comandoRelacionarAluno.Connection = conexao;
@@ -402,11 +449,13 @@ namespace Projeto1_RESTFulCSharp.Models
             }
         }
 
+        // Conecta professores ao projeto
         public void conectaProfessoresAoProjeto(int[] codigos, int codigoProjeto)
         {
             if (codigos.Length == 0 || codigos.Length > 2)
                 throw new Exception("O projeto deve possuir de 1 a 2 professores");
             
+            //Conecta o professor
             SqlCommand comandoRelacionarProfessor = new SqlCommand("ConectaProjetoProfessor_sp");
             comandoRelacionarProfessor.CommandType = System.Data.CommandType.StoredProcedure;
             comandoRelacionarProfessor.Connection = conexao;
@@ -468,9 +517,37 @@ namespace Projeto1_RESTFulCSharp.Models
             }
         }
 
-        public void AlterarProjeto(Projeto p, AlunoEProfessor alunosEProfessores)
+        public void AlterarDadosProjeto(int codigo, string nome, string ano, string descricao)
         {
+            try
+            {
+                //Alterar os dados do projeto passado por parâmetro
+                SqlCommand comando = new SqlCommand("alteraProjeto_sp");
+                comando.CommandType = System.Data.CommandType.StoredProcedure;
+                comando.Connection = conexao;
 
+                SqlParameter prmCodigo = new SqlParameter("@codProjeto", codigo);
+                prmCodigo.Direction = System.Data.ParameterDirection.Input;
+                comando.Parameters.Add(prmCodigo);
+
+                SqlParameter prmNome = new SqlParameter("@nome", nome);
+                prmNome.Direction = System.Data.ParameterDirection.Input;
+                comando.Parameters.Add(prmNome);
+
+                SqlParameter prmDescricao = new SqlParameter("@descricao", descricao);
+                prmDescricao.Direction = System.Data.ParameterDirection.Input;
+                comando.Parameters.Add(prmDescricao);
+
+                SqlParameter prmAno = new SqlParameter("@ano", ano);
+                prmAno.Direction = System.Data.ParameterDirection.Input;
+                comando.Parameters.Add(prmAno);
+
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public void ExcluirProjeto(int codProj)
